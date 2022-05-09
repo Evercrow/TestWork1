@@ -2,7 +2,7 @@
 
 string GetUserString()
 {
-    Console.WriteLine("Enter your string data in one line , with spaces as separators:");
+    Console.WriteLine("Enter your string data in one line , with 1 space as the separator:");
     string cons_input = Console.ReadLine();
     return cons_input;
 }
@@ -34,20 +34,6 @@ string[] StringToArray(string line)
     return word_array;
 }
 
-void ShowStrArray(string[] printed_array)
-{
-    int size = printed_array.GetLength(0);
-    for (int i = 0; i < size; i++)
-    {
-        if (i != size - 1)
-        {
-            Console.Write($"{printed_array[i]},");
-        }
-        else Console.Write($"{printed_array[i]}");
-
-    }
-}
-
 //3. Подсчет количества элементов с длиной меньше 4 символов для выяснения размера конечного массива.
 
 int CountShortWords(string[] word_array, int maxString = 3)
@@ -57,18 +43,79 @@ int CountShortWords(string[] word_array, int maxString = 3)
     {
         if (word_array[i].Length <= maxString) short_count ++;
     }
-    Console.WriteLine();
-    Console.WriteLine($"Found {short_count} words with less or equal to {maxString} symbols.");
+    // Console.WriteLine();
+    // Console.WriteLine($"Found {short_count} words with less or equal to {maxString} symbols.");
     return short_count;
 }
 
 //4. Создание конечного массива и запись всех элементов длиной меньше 4 символов . 
 
+string[] FilterShortToArray(string[] initArray, int maxString = 1)
+{
+    int size = CountShortWords(initArray, maxString);
+    string[] resultArray= new string[size];
+    int k=0;
+    
+    for (int i = 0; i < initArray.GetLength(0); i++)
+    {
+        if (initArray[i].Length <= maxString)
+        {
+            resultArray[k] = initArray[i];
+            k++;
+        }
+        
+    }
+    return resultArray;
+
+}
+
+//5. Вывод массива в консоль для проверки
+
+void ShowStrArray(string[] printed_array)
+{
+    int size = printed_array.GetLength(0);
+    for (int i = 0; i < size; i++)
+    {
+        if (i != size - 1)
+        {
+            Console.Write($"'{printed_array[i]}',");
+        }
+        else Console.Write($"'{printed_array[i]}'");
+
+    }
+}
 
 
+//Запуск наших методов для решения задачи.
+
+
+Console.Clear();
 string[] start_array = StringToArray(GetUserString());
-//ShowStrArray(start_array);
-CountShortWords(start_array);
+string[] end_array = FilterShortToArray(start_array, 3);
+
+Console.Write("[");
+ShowStrArray(start_array);
+Console.Write("] ->[");
+ShowStrArray(end_array);
+Console.WriteLine("]");
+
+
+//Проверка по примерам в условии
+
+/*
+// string[] start_array = {"hello","2","world",":-)"};
+// string[] start_array = {"1234","1567","-2","computer science"};
+string[] start_array = {"Russia","Denmark","Kazan"};
+
+string[] end_array = FilterShortToArray(start_array);
+
+Console.Write("[");
+ShowStrArray(start_array);
+Console.Write("] ->[");
+ShowStrArray(end_array);
+Console.WriteLine("]");
+*/
+
 
 
 
