@@ -17,11 +17,10 @@ string[] StringToArray(string line)
         if (line[i] == ' ') arr_size++;
     }
 
-    string[] word_array = new string[arr_size];
+    var word_array = new string[arr_size];
     int line_index = 0;
     for (int arr_index = 0; arr_index< arr_size; arr_index++)
     {
-        
         while (line[line_index] != ' ' )
         {
             word_array[arr_index] += line[line_index];
@@ -43,7 +42,7 @@ int CountShortWords(string[] word_array, int maxString = 3)
     {
         if (word_array[i].Length <= maxString) short_count ++;
     }
-    // Console.WriteLine();
+    // Console.WriteLine(); //Вывод информации в консоль. Закомменчен, чтобы не портить конечный вывод под оформление в условии. 
     // Console.WriteLine($"Found {short_count} words with less or equal to {maxString} symbols.");
     return short_count;
 }
